@@ -1,0 +1,27 @@
+@mixin BeforeIcon {
+	height: 1.75rem;
+	width: 1.75rem;
+	content: "";
+	display: inline-block;
+	margin: 1rem;
+	margin-right: .5rem;
+
+	
+	//Older browsers
+	background-size: cover;
+	//Newer browsers - masks
+	background-color: var(--color-primary);
+
+	@supports(-webkit-mask-image:url()) or (mask-image:url()){
+		mask-size: cover;
+		background-image: none;
+		-webkit-mask-size: cover;
+	}
+}
+
+@mixin ImgBasic{
+	box-sizing: content-box;
+	height: 3.5rem;
+	width: 3.5rem;
+	border-radius: 50%;
+}

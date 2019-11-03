@@ -1,0 +1,1098 @@
+/////////////////////////////////////////////////////////////////////
+//LOGO
+.logo {
+	height: 3.25rem;
+	margin-left: 2rem;
+}
+/////////////////////////////////////////////////////////////////////
+//SEARCH
+.search{
+//	background-color: orangered;
+	flex: 0 0 40%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+
+	@media only screen and (max-width: $bg-smallest){
+		order: 1;
+		flex: 0 0 100%;
+		background-color: var(--color-grey-light-2);
+	}
+
+	
+
+	&__input{
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		background-color: var(--color-grey-light-2);
+		border: none;
+		padding: .7rem 2rem;
+		border-radius: 100px;
+		width: 90%;
+		transition: all .2s;
+		margin-right: -3.25rem;
+
+		&:focus {
+			outline: none;
+			width: 100%;
+			background-color: var(--color-grey-light-3);
+		}
+
+		&::-webkit-input-placeholder{
+			font-weight: 100;
+			color: var(--color-grey-light-4);
+		}
+	}
+
+	&__input:focus + &__button {
+		background-color: var(--color-grey-light-3);
+	}
+
+	&__button{
+		border: none;
+		background-color: var(--color-grey-light-2);
+
+		&:focus{
+			outline: none;
+		}
+
+		&:active{
+			transform: translateY(2px);
+		}
+	}
+
+	&__icon{
+		height: 2rem;
+		width: 2rem;
+		//here we declare the color of the swg icon.
+		fill: var(--color-grey-dark-3);
+	}
+
+	/*put our suggestions under the search box*/
+	&__suggestions{
+		position: absolute;
+		top: 100%;
+		width: 95%;
+		left: 2rem;
+		z-index: 100;
+	}
+
+	/*and make the suggestion reappear when user focus on search field*/
+		&__input:focus ~ &__suggestions li{
+		    height: 3rem;
+		}
+
+	/*moving it slightly toware left when hovered*/
+	&__suggestions li:hover{
+		/*transform*/
+		-webkit-transform:translateX(-2rem);
+		   -moz-transform:translateX(-2rem);
+		    -ms-transform:translateX(-2rem);
+		     -o-transform:translateX(-2rem);
+		        transform:translateX(-2rem);
+		}
+		/*now first we will hide the suggestion list*/
+	&__suggestions li{
+		   overflow:hidden;
+			height: 0;
+			background-color: #fff;
+		    -webkit-transition:all 0.2s ease-in-out;
+		   -moz-transition:all 0.2s ease-in-out;
+		     -o-transition:all 0.2s ease-in-out;
+		        transition:all 0.2s ease-in-out;
+		    border-radius: 2rem;
+		    margin-top: .6rem;
+		    display: flex;
+		    align-items: center;
+		    cursor: pointer;
+		}
+
+	&__suggestions a{
+		text-decoration: none;
+		color: var(--color-primary);
+		margin-left: .8rem;
+	}
+}
+/////////////////////////////////////////////////////////////////////
+//USER NAVIGATION
+		.user-nav {
+			//background-color: greenyellow;
+
+			display: flex;
+			align-self: stretch;
+
+
+			& > *{
+				padding: 0 2rem;
+				cursor: pointer;
+				height: 100%;
+				display: flex;
+				align-items: center;
+			}
+
+			& > *:hover{
+				background-color: var(--color-grey-light-2);
+			}
+
+			.notification-container, .message-container{
+							position: relative;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+
+							//order: 1px solid blue;
+						}
+
+			&__icon-box{
+				//border: 1px solid red;
+
+			}
+
+			&__icon{
+				display: block;
+				height: 2.25rem;
+				width: 2.25rem;
+				fill: var(--color-grey-dark-2);
+			}
+
+			&__notification{
+				font-size: .8rem;
+				height: 1.75rem;
+				width: 1.75rem;
+				border-radius: 50%;
+				background-color: var(--color-primary);
+				color: #fff;
+				position: absolute;
+				top: 1.5rem;
+				right: 1.1rem;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+
+			.user-container{
+				position: relative;
+
+				&:hover .user-nav-menu{
+					left: -62%;
+					z-index: 2000;
+					opacity: 1;
+				}
+
+				.user-nav-menu
+				{
+						overflow: hidden;
+						position: absolute;
+						top: 100%;
+						left: 2rem;
+						display: flex;
+						align-items: center;
+						background-color: #fff;
+						border-radius: 3px;
+						margin-right: -1px;
+						z-index: -1;
+						opacity: 0;
+						transition: .15s all;
+						cursor: auto;
+						box-shadow: var(--shadow-dark);
+						border-bottom: var(--line);
+
+						&:hover{
+							transform: translateX(0);
+						}
+						
+			
+						&__list{
+							padding: 2rem;
+							list-style: none;
+							width: 100%;
+						}
+
+						&__item{
+								display: flex;
+								align-items: center;
+								border-bottom: var(--line);
+								&:hover{
+									background-color: var(--color-grey-light-1);
+								}
+
+								&:not(:last-child){
+									margin-bottom: .9rem;
+									
+								}
+
+								&-1::before{
+									@include BeforeIcon;
+									//Older browsers
+									background-image: url(../img/SVG/home.svg);
+									//Mask allows us to look through the mask element at the background it can be text svg etc.
+									@supports(-webkit-mask-image:url()) or (mask-image:url()){
+									-webkit-mask-image: url(../img/SVG/home.svg);
+									 mask-image: url(../img/SVG/home.svg);
+									}
+								}
+
+								&-2::before{
+									@include BeforeIcon;
+									//Older browsers
+									background-image: url(../img/SVG/newspaper.svg);
+									//Mask allows us to look through the mask element at the background it can be text svg etc.
+									@supports(-webkit-mask-image:url()) or (mask-image:url()){
+									-webkit-mask-image: url(../img/SVG/newspaper.svg);
+									 mask-image: url(../img/SVG/newspaper.svg);
+									}
+								}
+
+								&-3::before{
+									@include BeforeIcon;
+									//Older browsers
+									background-image: url(../img/SVG/user.svg);
+									//Mask allows us to look through the mask element at the background it can be text svg etc.
+									@supports(-webkit-mask-image:url()) or (mask-image:url()){
+									-webkit-mask-image: url(../img/SVG/user.svg);
+									 mask-image: url(../img/SVG/user.svg);
+									}
+								}
+
+								&-4::before{
+									@include BeforeIcon;
+									//Older browsers
+									background-image: url(../img/SVG/users.svg);
+									//Mask allows us to look through the mask element at the background it can be text svg etc.
+									@supports(-webkit-mask-image:url()) or (mask-image:url()){
+									-webkit-mask-image: url(../img/SVG/users.svg);
+									 mask-image: url(../img/SVG/users.svg);
+									}
+								}
+
+								&-5::before{
+									@include BeforeIcon;
+									//Older browsers
+									background-image: url(../img/SVG/camera.svg);
+									//Mask allows us to look through the mask element at the background it can be text svg etc.
+									@supports(-webkit-mask-image:url()) or (mask-image:url()){
+									-webkit-mask-image: url(../img/SVG/camera.svg);
+									 mask-image: url(../img/SVG/camera.svg);
+									}
+								}
+
+
+							}
+
+
+						&__link:visited,
+						&__link:link{
+							color: var(--color-grey-dark-1);
+							font-size: 1.6rem;
+							text-decoration: none;
+							transition: .2s all;
+							display: inline-block;
+							padding: .7rem 1.4rem;
+							width: 86%;
+							&:hover{
+								color: var(--color-primary);
+							}
+						}
+				}
+			}
+
+
+			&__user{
+				display: flex;
+				align-items: center;
+
+				&:hover .user-nav-menu{
+						left: 0;
+					}
+			}
+
+			&__user-photo{
+				height: 3.75rem;
+				border-radius: 50%;
+				margin-right: 1rem;
+			}	
+
+			
+		}
+
+
+/////////////////////////////////////////////////////////////////////
+//USER NOTIFICATION
+.notification-container{
+	&:hover .user-notification-menu{
+		z-index: 2000;
+		margin-left: 0;
+		opacity: 1;
+	}
+}
+
+.user-notification-menu{
+	position: absolute;
+	top: 100%;
+	left: -10.2rem;
+	//background-color: orangered;
+	min-width: 35rem;
+	cursor: auto;
+	border-radius: 3px;
+	overflow: hidden;
+	box-shadow: var(--shadow-dark);
+	//for animation
+	z-index: -1;
+	margin-left: 20rem;
+	opacity: 0;
+	transition: .2s all;
+
+
+	&__header{
+		font-size: 1.3rem;
+		padding: .2rem .5rem;
+		border: 1px solid white;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: var(--color-grey-light-1);
+		border-bottom: var(--line);
+		border-top: var(--line);
+		
+		color: var(--color-primary);
+	}
+
+	&__header-name{
+		margin-left: .7rem;
+	}
+
+	&__header-link{
+		margin-right: .7rem;
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		color: var(--color-grey-dark-1);
+		transition: .2s all;
+		&:hover{
+			color: var(--color-primary);
+		}
+	}
+
+	&__content{
+
+	}
+
+	&__content-list{
+
+	}
+
+	&__content-item{
+		padding: .8rem 1.6rem;
+		position: relative;
+		background-color: #fff;
+		border-bottom: var(--line);
+		transition: .2s all;
+		&:hover{
+			background-color: var(--color-grey-light-3);
+		}
+	}
+
+	&__content-link{
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		font-size: 1.4rem;
+		color: var(--color-grey-dark-1);
+		margin: 1rem 0;
+	}
+
+	&__content-image{
+		@include ImgBasic;
+		margin-right: .8rem;
+	}
+
+	&__content-name{
+		font-weight: 600;
+	}
+
+	&__content-time{
+		position: absolute;
+		top: 70%;
+		right: 1rem;
+		color: var(--color-grey-dark-3);
+		font-size: 1rem;
+	}
+
+	&__footer{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--color-grey-light-3);
+		border-top: var(--line);
+	}
+
+	&__footer-btn{
+		margin: 1rem 0;
+		text-decoration: none;
+		font-size: 1.6rem;
+		color: var(--color-primary);
+		display: flex;
+		align-items: center;
+	}
+
+}
+/////////////////////////////////////////////////////////////////////
+//USER CHAT
+
+.message-container{
+	&:hover .user-message-menu{
+		opacity: 1;
+		z-index: 2000;
+		margin-left: 0;
+		
+	}
+}
+
+.user-message-menu{
+	position: absolute;
+	top: 100%;
+	z-index: -1;
+	opacity: 0;
+	margin-left: 10rem;
+	display: flex;
+	flex-direction: column;
+	min-width: 31rem;
+	cursor: auto;
+	overflow: hidden;
+	border-radius: 3px;
+	transition: .2s all;
+	box-shadow: var(--shadow-dark);
+
+	&__header-name{
+		background-color: var(--color-primary);
+		color: var(--color-grey-light-1);
+		font-size: 1.6rem;
+		padding: .2rem;
+	}
+
+	&__header-option{
+		display: flex;
+		background-color: var(--color-grey-light-2);
+	}
+//header item
+	&__header-item{
+		padding: .4rem 1rem;
+	}
+
+	&__header-link, &__link{
+		text-decoration: none;
+		transition: all .2s;
+		color: var(--color-grey-dark-1);
+		&:hover{
+			color: var(--color-primary);
+		}
+	}
+
+	&__header-link{
+		display: flex;
+		align-items: center;
+	}
+
+	&__icon-1{
+			@include BeforeIcon;
+			//Older browsers
+			background-image: url(../img/SVG/grid.svg);
+			//Mask allows us to look through the mask element at the background it can be text svg etc.
+			@supports(-webkit-mask-image:url()) or (mask-image:url()){
+			-webkit-mask-image: url(../img/SVG/grid.svg);
+			 mask-image: url(../img/SVG/grid.svg);
+			}					
+	}
+
+	&__icon-2{
+
+			@include BeforeIcon;
+			//Older browsers
+			background-image: url(../img/SVG/cog.svg);
+			//Mask allows us to look through the mask element at the background it can be text svg etc.
+			@supports(-webkit-mask-image:url()) or (mask-image:url()){
+			-webkit-mask-image: url(../img/SVG/cog.svg);
+			 mask-image: url(../img/SVG/cog.svg);
+			}						
+	}
+
+//friends list
+	&__list{
+		//border: 1px solid orangered;
+		background-color: #fff;
+	}
+
+	&__item{
+		&:not(:last-child){
+			//margin-bottom: .4rem;
+			
+		}
+		border-bottom: var(--line);
+		padding: 1.5rem 1.25rem;
+		cursor: pointer;
+		//border: 1px solid red;
+		position: relative;
+		width: 100%;
+		transition: all .2s;
+		&:hover{
+			background-color: var(--color-grey-light-2);
+		}
+	}
+
+	&__link{
+		display: flex;
+		align-items: center;
+	}
+
+	&__link-image{
+		@include ImgBasic;
+	}
+
+	&__link-name{
+		position: absolute;
+		top: .6rem;
+		left: 5rem;
+		font-size: 1.2rem;
+		color: var(--color-primary-light);
+	}
+
+	&__link-message{
+		font-size: 1rem;
+		margin-left: .8rem;
+		color: var(--color-grey-dark-3);
+	}
+}
+	
+
+/////////////////////////////////////////////////////////////////////
+//SIDE NAVIGATION
+.side-nav {
+	font-size: 1.4rem;
+	list-style: none;
+	margin-top: 3.5rem;
+
+	@media only screen and (max-width: $bg-medium) {
+		display: flex;
+		margin: 0;
+	}
+
+	&__item{
+		position: relative;
+
+		&:not(:last-child){
+			margin-bottom: .5rem;
+			@media only screen and (max-width: $bg-medium) {
+				margin: 0;
+			}
+		}
+
+		@media only screen and (max-width: $bg-medium) {
+			flex: 1;
+		}
+	}
+
+	&__item::before{
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 3px;
+		background-color: var(--color-primary);
+		transform: scaleY(0);
+		transition: transform .2s,
+					width .4s cubic-bezier(1,0,0,1) .2s,
+					background-color .1s;
+	}
+	
+	&__item:hover::before,
+	&__item--active::before{
+		transform: scaleY(1);
+		width: 100%;
+	}
+
+	&__item:active::before {
+		background-color: var(--color-primary-light);
+	}
+
+	&__link:link,
+	&__link:visited {
+		color: var(--color-grey-light-1);
+		text-decoration: none;
+		text-transform: uppercase;
+		padding: 1.5rem 3rem;
+		position: relative;
+		z-index: 10;
+
+		display: flex;
+		align-items: center;
+
+		@media only screen and (max-width: $bg-medium) {
+			justify-content: center;
+			padding: 2rem;
+		}
+
+		@media only screen and (max-width: $bg-small) {
+			flex-direction: column;
+			padding: 1.5rem .5rem;
+		}
+	}
+
+	&__icon{
+		width: 1.75rem;
+		height: 1.75rem;
+		margin-right: 2rem;
+
+//currentColor: the current color of the current or parent element 
+//in our case color: var(--color-grey-light-1); Test: color: blue;
+		fill: currentColor;
+
+		@media only screen and (max-width: $bg-small) {
+			margin-right: 0;
+			margin-bottom: .7rem;
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
+//LEGAL TEXT
+.legal{
+	font-size: 1.2rem;
+	color: var(--color-grey-light-4);
+	text-align: center;
+	padding: 2.5rem;
+
+	@media only screen and (max-width: $bg-medium) {
+		display: none;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
+//GALLERY
+.gallery{
+	display: flex;
+
+	&__item{
+		position: relative;
+	}
+
+	 &__photo{
+		width: 100%;
+		display: block;
+		transition: .5s all;
+		backface-visibility: hidden;
+	 }
+
+	 &__item:hover &__photo{
+		transform: scale(.99);
+		filter: blur(3px) brightness(80%);
+	}
+
+	&__item:hover &__caption{
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+
+	 &__caption{
+	 	position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, 20%);
+		color: #fff;
+		text-transform: uppercase;
+		font-size: 1.8rem;
+		text-align: center;
+		opacity: 0;
+		transition: all .5s;
+		backface-visibility: hidden;
+	 }
+
+	 &__item-2 &__caption{
+		color: var(--color-secondary);
+	}
+
+	 &__item-3 &__caption{
+		color: #000;
+	}
+
+
+}
+
+/////////////////////////////////////////////////////////////////////
+//HOTEL OVERVIEW
+.overview{
+	display: flex;
+	align-items: center;
+	border-bottom: var(--line);
+
+	&__heading{
+		font-size: 2.25rem;
+		font-weight: 300;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		padding: 1.5rem 3rem;
+
+		@media only screen and (max-width: $bg-small) {
+			font-size: 1.8rem;
+			padding: 1.25rem 2rem;
+		}
+
+		@media only screen and (max-width: $bg-smallest) {
+			font-size: 1.6rem;
+			padding: 1.25rem 0.7rem;
+		}
+	}
+
+	&__stars {
+		//Creating maximum margin available between current and the next flex element.
+		margin-right: auto;
+		display: flex;
+	}
+
+	&__icon-star,
+	&__icon-location{
+		width: 1.75rem;
+		height: 1.75rem;
+		fill: var(--color-primary);
+
+		@media only screen and (max-width: $bg-smallest) {
+			width: 1.45rem;
+			height: 1.45rem;
+		}
+	}
+
+	&__location{
+		font-size: 1.2rem;
+		display: flex;
+		align-items: center;
+
+		@media only screen and (max-width: $bg-smallest) {
+			font-size: 1.1rem;
+		}
+	}
+
+	&__icon-location{
+		margin-right: .5rem;
+	}
+
+	&__rating{
+		background-color: var(--color-primary);
+		margin-left: 3rem;
+		color: #fff;
+		padding: 0 2.25rem;
+		align-self: stretch;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		@media only screen and (max-width: $bg-small) {
+			padding: 0 1.5rem;
+		}
+
+		@media only screen and (max-width: $bg-smallest) {
+			margin-left: 1rem;
+		}
+	}
+
+	&__rating-average{
+		font-size: 2.25rem;
+		font-weight: 300;
+		margin-bottom: -3px;
+
+		@media only screen and (max-width: $bg-small) {
+			font-size: 1.8rem;
+		}
+
+		@media only screen and (max-width: $bg-smallest) {
+			font-size: 1.6rem;
+		}
+	}
+
+	&__rating-count{
+		font-size: .8rem;
+		text-transform: uppercase;
+
+		@media only screen and (max-width: $bg-small) {
+			font-size: .5rem;
+		}
+	}
+}
+
+
+/////////////////////////////////////////////////////////////////////
+//BUTTON INLINE
+.btn-inline {
+	border: none;
+	color: var(--color-primary);
+	font-size: inherit;
+	border-bottom: 1px solid currentColor;
+	padding-bottom: 2px;
+	display: inline-block;
+	background-color: transparent;
+	cursor: pointer;
+	transition: all .2s;
+
+	& span{
+		margin-left: 3px;
+		transition: margin-left .2s;
+	}
+
+	&:hover{
+		color: var(--color-grey-dark-1);
+
+		span{
+			margin-left: 8px;
+		}
+	}
+
+	&:focus{
+		outline: none;
+		animation: pulsate 1s infinite;
+	}
+}
+
+@keyframes pulsate {
+	0%{
+		transform: scale(1);
+		box-shadow: none;
+	}
+
+	50%{
+		transform: scale(1.05);
+		box-shadow: 0 1rem 4rem rgba(0,0,0,.25);
+	}
+
+	100%{
+		transform: scale(1);
+		box-shadow: none;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
+//PARAGRAPH
+.paragraph:not(:last-of-type){
+	margin-bottom: 2rem;
+}
+
+/////////////////////////////////////////////////////////////////////
+//LIST
+.list{
+	margin: 3rem 0;
+	padding: 3rem 0;
+	border-top: var(--line);
+	border-bottom: var(--line);
+
+	display: flex;
+	flex-wrap: wrap;
+
+	&__item{
+		flex: 0 0 50%;
+		display: flex;
+		align-items: center;
+		margin-bottom: .7rem;
+	}
+
+	&__item::before{
+		@include BeforeIcon;
+		content: "";
+		height: 1rem;
+		width: 1rem;
+		display: inline-block;
+		margin-right: .7rem;
+
+		//Older browsers
+		background-image: url(../img/chevron-thin-right.svg);
+		background-size: cover;
+	
+		//Newer browsers - masks
+		background-color: var(--color-primary);
+
+		//Mask allows us to look through the mask element at the background it can be text svg etc.
+		@supports(-webkit-mask-image:url()) or (mask-image:url()){
+		-webkit-mask-image: url(../img/chevron-thin-right.svg);
+		-webkit-mask-size: cover;
+		 mask-image: url(../img/chevron-thin-right.svg);
+		 mask-size: cover;
+		 background-image: none;
+		}
+	}
+}
+
+
+/////////////////////////////////////////////////////////////////////
+//RECOMMEND
+.recommend{
+	font-size: 1.3rem;
+	color: var(--color-grey-dark-3);
+
+	display: flex;
+	align-items: center;
+
+
+	&__count{
+		margin-right: auto;
+	}
+
+	&__friends{
+		display: flex;
+	}
+
+	&__photo {
+		box-sizing: content-box;
+		height: 4rem;
+		width: 4rem;
+		border-radius: 50%;
+		border: 3px solid #fff;
+
+		&:not(:last-child) {
+			margin-right: -2rem;
+		}
+	}
+}
+
+
+/////////////////////////////////////////////////////////////////////
+//REVIEWS
+.review{
+	background-color: #fff;
+	box-shadow: var(--shadow-light);
+	padding: 3rem;
+	margin-bottom: 3.5rem;
+	position: relative;
+	overflow: hidden;
+
+	@media only screen and (max-width: $bg-medium) {
+		padding: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	&__text{
+		margin-bottom: 2.5rem;
+		z-index: 10;
+		position: relative;
+	}
+
+	&__user {
+		display: flex;
+		align-items: center;
+	}
+
+	&__photo{
+		height: 4.5rem;
+		width: 4.5rem;
+		margin-right: 1.5rem;
+		border-radius: 50%;
+	}
+
+	&__user-box{
+		margin-right: auto;
+	}
+
+	&__user-name{
+		color: var(--color-grey-dark-1);
+		font-weight: 600;
+		font-size: 1.1rem;
+		text-transform: uppercase;
+		margin-bottom: .4rem;
+	}
+
+	&__user-date{
+		font-size: 1rem;
+		color: var(--coolor-grey-dark-3);
+	}
+
+	&__rating{
+		font-size: 2.25rem;
+		font-weight: 300;
+		color: var(--color-primary);
+	}
+
+	&::before{
+		content: "\201C";
+		position: absolute;
+		top: -2.75rem;
+		left: -1rem;
+		line-height: 1;
+		font-size: 20rem;
+		color: var(--color-grey-light-2);
+		font-family: sans-serif;
+		z-index: 1;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
+//CALL TO ACTION
+.cta{
+	padding: 3.5rem 0;
+	text-align: center;
+
+	@media only screen and (max-width: $bg-medium) {
+		padding: 2.5rem 0;
+	}
+
+	&__book-now{
+		font-size: 2rem;
+		font-weight: 300;
+		text-transform: uppercase;
+		margin-bottom: 2.5rem;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
+//CALL TO ACTION
+.btn{
+	font-size: 1.5rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	border: none;
+	border-radius: 100px;
+	background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
+	color: #fff;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+
+	& > *{
+		display: inline-block;
+		height: 100%;
+		width: 100%;
+		transition: all .2s;
+	}
+
+	&__visible{		
+		padding: 2rem 7.5rem;
+	}
+
+	&__invisible{
+		position: absolute;
+		padding: 2rem 0;
+		left: 0;
+		top: -100%;
+	}
+
+	&:hover{
+		background-image: linear-gradient(to left, var(--color-primary), var(--color-primary-dark));
+	}
+
+	&:hover &__visible{
+			transform: translateY(100%);
+		}
+
+	&:hover &__invisible{
+			top: 0;
+		}
+
+	&:focus{
+		outline: none;
+		animation: pulsate 1s infinite;
+	}
+}
